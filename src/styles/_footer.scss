@@ -1,0 +1,15 @@
+.single-footer{
+    position: fixed;
+    color: white;
+    width: 100vw;
+    height: 2rem;
+    background-color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1100;
+    h2{
+        font-weight: 200;
+        font-size: 1rem;
+    }
+}

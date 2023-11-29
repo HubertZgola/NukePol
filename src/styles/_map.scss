@@ -1,0 +1,13 @@
+.fullscreen-map {
+    margin-top: 13vh;
+    height: 84vh;
+    width: 100vw;
+  }
+
+  @media only screen and (max-width: 1190px) {
+    .fullscreen-map {
+      margin-top: 13vh;
+      height: 87vh;
+      width: 100vw;
+    }
+  }

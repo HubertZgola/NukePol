@@ -1,0 +1,14 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 200;
+}
+
+@import "./_nav";
+@import "./_map";
+@import "./_settings";
+@import "./_footer";
