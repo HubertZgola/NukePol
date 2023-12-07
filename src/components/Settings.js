@@ -3,7 +3,7 @@ import BasicSettings from './BasicSettings';
 import AdvSettings from './AdvSettings';
 import DataSettings from './DataSettings';
 
-const Settings = ({ isOpen, onDetonate, setIsOpen, setSelectedWarhead, handleCityChange}) => {
+const Settings = ({ isOpen, onDetonate, setIsOpen, setSelectedWarhead, handleCityChange, onEffectsChange, setExplosionType }) => {
   const [city, setCity] = useState('');
 
   const findCityCoordinates = async (cityName) => {
@@ -44,12 +44,12 @@ const Settings = ({ isOpen, onDetonate, setIsOpen, setSelectedWarhead, handleCit
         handleDetonateClick={handleDetonateClick}
         setSelectedWarhead={setSelectedWarhead} 
         handleCityChange={handleCityChange}
-        />
-      <AdvSettings />
+        setExplosionType={setExplosionType} // Przekazywanie setExplosionType do BasicSettings
+      />
+      <AdvSettings onEffectsChange={onEffectsChange}/>
       <DataSettings />
     </div>
   );
 };
-
 
 export default Settings;
