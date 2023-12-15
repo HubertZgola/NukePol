@@ -1,0 +1,37 @@
+.about-circle-info {
+    top: 15vh;
+    left: 78vw;
+    border-radius: 15px;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    width: 20vw;
+    height: 80vh;
+    overflow: auto;
+    background-color: #ffffff9d;
+    box-shadow:0 12px 50px #333;
+    color: rgb(255, 255, 255);
+    z-index: 900;
+    h2{
+        color: rgb(0, 0, 0);
+        font-size: 1.5rem;
+        padding: 1.5rem 3rem;
+    }
+    p{
+        padding: 0 1rem;
+        cursor: pointer;
+    }
+}
+
+@media only screen and (max-width: 1190px) {
+    .about-circle-info{
+        width: 94vw;
+        height: 30vh;
+        left: 3vw;
+        top: 62vh;
+        h2{
+            padding: 1rem;
+        }
+        
+    }
+}

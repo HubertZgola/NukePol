@@ -29,7 +29,6 @@ const Nav = ({ onDetonate, setSelectedWarhead, handleCityChange, onEffectsChange
       Pierwszego: false,
       Drugiego: false,
       Trzeciego: false,
-      Czwartego: false,
       fireball: false
     });
   };

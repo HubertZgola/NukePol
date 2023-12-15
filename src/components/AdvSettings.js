@@ -14,7 +14,6 @@ const AdvSettings = ({ onEffectsChange }) => {
     Pierwszego: false,
     Drugiego: false,
     Trzeciego: false,
-    Czwartego: false,
     fireball: false
   });
 
@@ -65,7 +64,7 @@ const AdvSettings = ({ onEffectsChange }) => {
         </label>
       ))}
       <h4>Pierścienie promieniowania cieplnego</h4>
-      {['Pierwszego', 'Drugiego', 'Trzeciego', 'Czwartego'].map((degree) => (
+      {['Pierwszego', 'Drugiego', 'Trzeciego'].map((degree) => (
         <label key={degree}>
           <p>{`Oparzenia ${degree} Stopnia`}</p>
           <input 

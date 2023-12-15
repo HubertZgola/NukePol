@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useCallback } from 'react';
 import './styles/app.scss';
 import FullScreenMap from './components/fullScreanMap';
 import Nav from './components/Nav';
@@ -25,19 +25,25 @@ const App = () => {
     Pierwszego: false,
     Drugiego: false,
     Trzeciego: false,
-    Czwartego: false,
     fireball: false
   });
+  const [circleInfo, setCircleInfo] = useState([]);
+
+  const updateCircleInfo = useCallback((newInfo) => {
+    setCircleInfo(prevInfo => [...prevInfo, newInfo]);
+  }, []);
 
   const handleDetonate = (coordinates) => {
     setCityCoordinates([coordinates.lat, coordinates.lon]);
     setShouldDrawCircle(true);
     setIsDetonated(true);
+    setCircleInfo([]); // Resetowanie informacji o efektach przy detonacji
   };
 
   const handleCityChange = (newCity) => {
     setShouldDrawCircle(false);
     setCityCoordinates(null);
+    setCircleInfo([]); // Resetowanie informacji o efektach przy zmianie miasta
   };
 
   const handleEffectsChange = (newEffects) => {
@@ -49,14 +55,8 @@ const App = () => {
     setIsDetonated(false);
     setCityCoordinates(null);
     setMapKey(Date.now());
+    setCircleInfo([]); // Resetowanie informacji o efektach przy czyszczeniu detonacji
   };
-
-  useEffect(() => {
-    console.log("App - City Coordinates:", cityCoordinates);
-    console.log("App - Selected Warhead:", selectedWarhead);
-    console.log("App - Explosion Type:", explosionType);
-    console.log("App - Simulation Effects:", simulationEffects);
-  }, [cityCoordinates, selectedWarhead, explosionType, simulationEffects]);
 
   return (
     <div>
@@ -77,6 +77,9 @@ const App = () => {
         explosionType={explosionType}
         shouldDrawCircle={shouldDrawCircle}
         simulationEffects={simulationEffects}
+        isDetonated={isDetonated}
+        setCircleInfo={updateCircleInfo}
+        circleInfo={circleInfo}
       />
       <Footer />
     </div>

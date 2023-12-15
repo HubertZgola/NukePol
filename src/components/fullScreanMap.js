@@ -1,6 +1,8 @@
-import { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { MapContainer, TileLayer, useMap } from 'react-leaflet';
 import Circle from './Circle';
+import AboutCircle from './AboutCircle';
+import effectColors from '../ulilities/effectColors';
 import 'leaflet/dist/leaflet.css';
 
 const ChangeView = ({ center, zoom }) => {
@@ -11,12 +13,22 @@ const ChangeView = ({ center, zoom }) => {
   return null;
 };
 
-const FullScreenMap = ({ cityCoordinates, selectedWarhead, shouldDrawCircle, simulationEffects, explosionType }) => {
+const FullScreenMap = ({
+  cityCoordinates, 
+  selectedWarhead, 
+  shouldDrawCircle, 
+  simulationEffects, 
+  explosionType,
+  isDetonated,
+  setCircleInfo,
+  circleInfo
+}) => {
   const zoomLevel = 10;
   const defaultPosition = useMemo(() => [52.0693, 19.4803], []);
 
   const [mapCenter, setMapCenter] = useState(defaultPosition);
   const [mapZoom, setMapZoom] = useState(7);
+  const [currentEffectColors, setCurrentEffectColors] = useState({ ...effectColors });
 
   useEffect(() => {
     if (cityCoordinates) {
@@ -32,8 +44,22 @@ const FullScreenMap = ({ cityCoordinates, selectedWarhead, shouldDrawCircle, sim
         attribution='Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
       />
       {cityCoordinates && <ChangeView center={cityCoordinates} zoom={mapZoom} />}
-      {cityCoordinates && selectedWarhead && shouldDrawCircle && 
-        <Circle cityCoordinates={cityCoordinates} selectedWarhead={selectedWarhead} effects={simulationEffects} explosionType={explosionType} />}
+      {cityCoordinates && selectedWarhead && shouldDrawCircle && (
+        <Circle
+          cityCoordinates={cityCoordinates}
+          selectedWarhead={selectedWarhead}
+          effects={simulationEffects}
+          explosionType={explosionType}
+          setCircleInfo={setCircleInfo}
+          effectColors={currentEffectColors}
+        />
+      )}
+      {isDetonated && (
+        <AboutCircle 
+          data={circleInfo}
+          currentEffectColors={currentEffectColors}
+        />
+      )}
     </MapContainer>
   );
 };
