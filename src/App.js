@@ -30,7 +30,8 @@ const App = () => {
   const [circleInfo, setCircleInfo] = useState([]);
 
   const updateCircleInfo = useCallback((newInfo) => {
-    setCircleInfo(prevInfo => [...prevInfo, newInfo]);
+    setCircleInfo(newInfo);
+    // setCircleInfo(prevInfo => [...prevInfo, newInfo]);
   }, []);
 
   const handleDetonate = (coordinates) => {
@@ -57,6 +58,7 @@ const App = () => {
     setMapKey(Date.now());
     setCircleInfo([]); // Resetowanie informacji o efektach przy czyszczeniu detonacji
   };
+
 
   return (
     <div>

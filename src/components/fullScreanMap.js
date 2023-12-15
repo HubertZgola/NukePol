@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { MapContainer, TileLayer, useMap } from 'react-leaflet';
 import Circle from './Circle';
 import AboutCircle from './AboutCircle';
@@ -23,14 +23,20 @@ const FullScreenMap = ({
   setCircleInfo,
   circleInfo
 }) => {
+  console.log('Renderowanie FullScreenMap');
   const zoomLevel = 10;
   const defaultPosition = useMemo(() => [52.0693, 19.4803], []);
-
+  const [selectedEffect, setSelectedEffect] = useState(null);
   const [mapCenter, setMapCenter] = useState(defaultPosition);
   const [mapZoom, setMapZoom] = useState(7);
-  const [currentEffectColors, setCurrentEffectColors] = useState({ ...effectColors });
+
+  const onEffectClick = useCallback((selectedEffect) => {
+    setSelectedEffect(selectedEffect);
+  }, []);
 
   useEffect(() => {
+    console.log("Aktualizacja współrzędnych miasta:", cityCoordinates);
+    console.log("Poziom zoomu:", zoomLevel);
     if (cityCoordinates) {
       setMapCenter(cityCoordinates);
       setMapZoom(zoomLevel);
@@ -51,13 +57,17 @@ const FullScreenMap = ({
           effects={simulationEffects}
           explosionType={explosionType}
           setCircleInfo={setCircleInfo}
-          effectColors={currentEffectColors}
+          effectColors={effectColors}
+          onEffectClick={onEffectClick}
+          selectedEffect={selectedEffect}
         />
       )}
       {isDetonated && (
         <AboutCircle 
           data={circleInfo}
-          currentEffectColors={currentEffectColors}
+          currentEffectColors={effectColors}
+          onEffectClick={onEffectClick}
+          selectedEffect={selectedEffect}
         />
       )}
     </MapContainer>

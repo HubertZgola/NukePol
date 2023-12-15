@@ -6,9 +6,9 @@ import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 import ReactDOMServer from 'react-dom/server';
 import warheadRadii from '../ulilities/warheadRadii';
 
-const Circle = ({ cityCoordinates, selectedWarhead = '20t', effects, explosionType, setCircleInfo, effectColors }) => {
+const Circle = ({ cityCoordinates, selectedWarhead = '20t', effects, explosionType, setCircleInfo, effectColors, onEffectClick, selectedEffect }) => {
     const map = useMap();
-    const previousDataRef = useRef();
+    const circlesRef = useRef(new Map());  // Dodana referencja do przechowywania okręgów
 
     const customMarkerIcon = L.divIcon({
         html: ReactDOMServer.renderToString(<FontAwesomeIcon icon={faMapMarkerAlt} size="2x" />),
@@ -29,47 +29,71 @@ const Circle = ({ cityCoordinates, selectedWarhead = '20t', effects, explosionTy
                   Math.cos(φ1) * Math.cos(φ2) *
                   Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
         const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+        console.log(`Obliczona odległość dla lat1=${lat1}, lon1=${lon1}, lat2=${lat2}, lon2=${lon2}:`, (R * c) / 1000);
         return (R * c) / 1000; // Wynik w kilometrach
     };
 
-    const calculateCircleArea = (r) => Math.PI * r * r;
+    const calculateCircleArea = (r) => {
+        console.log(`Obliczona powierzchnia koła dla promienia ${r}:`, Math.PI * r * r);
+        return Math.PI * r * r;
+    };
 
     const generateCircleData = useCallback(() => {
         let circleData = [];
+        console.log("Wywołanie generateCircleData");
+        console.log("Wygenerowane circleData:", circleData);
         L.marker(cityCoordinates, { icon: customMarkerIcon }).addTo(map);
 
+
+        console.log('Rozpoczęcie generowania danych koła');
         Object.entries(effects).forEach(([effect, isActive]) => {
-            if (isActive && warheadRadii[explosionType][selectedWarhead][effect]) {
-                const circle = L.circle(cityCoordinates, {
-                    color: effectColors[effect],
-                    fillColor: effectColors[effect],
-                    fillOpacity: 0.2,
-                    radius: warheadRadii[explosionType][selectedWarhead][effect]
-                }).addTo(map);
-
-                const edgeCoordinates = circle.getBounds().getNorthEast();
-                const distance = calculateDistance(cityCoordinates[0], cityCoordinates[1], edgeCoordinates.lat, edgeCoordinates.lng);
-                const circleArea = calculateCircleArea(distance);
-
-                circleData.push({
-                    effect: effect,
-                    distance: distance.toFixed(2),
-                    circleArea: circleArea.toFixed(2)
-                });
+            if (isActive) {
+                const effectRadius = warheadRadii[explosionType]?.[selectedWarhead]?.[effect];
+                if (effectRadius !== undefined) {
+                    const borderColor = effectColors[effect];
+                    const circle = L.circle(cityCoordinates, {
+                        color: borderColor,
+                        fillColor: effectColors[effect],
+                        fillOpacity: 0.1,
+                        radius: effectRadius
+                    }).addTo(map);
+    
+                    const edgeCoordinates = circle.getBounds().getNorthEast();
+                    const distance = calculateDistance(cityCoordinates[0], cityCoordinates[1], edgeCoordinates.lat, edgeCoordinates.lng);
+                    const circleArea = calculateCircleArea(distance);
+    
+                    circleData.push({
+                        effect: effect,
+                        distance: distance.toFixed(2),
+                        circleArea: circleArea.toFixed(2)
+                    });
+    
+                    // Zapisywanie okręgu w referencji
+                    circlesRef.current.set(effect, circle);
+                }
             }
         });
-
+    
         return circleData;
     }, [cityCoordinates, selectedWarhead, effects, explosionType, customMarkerIcon, map, effectColors]);
-
+// eslint-disable-next-line react-hooks/exhaustive-deps    
     useEffect(() => {
         const circleData = generateCircleData();
-
-        if (JSON.stringify(circleData) !== JSON.stringify(previousDataRef.current)) {
+        if (circleData && circleData.length > 0) {
+            console.log("Generated circleData in Circle:", circleData);
             setCircleInfo(circleData);
-            previousDataRef.current = circleData;
         }
-    }, [cityCoordinates, selectedWarhead, effects, explosionType, generateCircleData, setCircleInfo]);
+    }, [cityCoordinates, selectedWarhead, effects, explosionType, setCircleInfo]);
+    
+
+    useEffect(() => {
+        if (selectedEffect !== null) {
+          circlesRef.current.forEach((circle, key) => {
+            circle.setStyle({ color: key === selectedEffect ? 'blue' : effectColors[key] });
+          });
+        }
+      }, [selectedEffect, effectColors]);
 
     return null;
 };
