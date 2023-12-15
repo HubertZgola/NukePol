@@ -1,10 +1,12 @@
 import React from 'react';
 
-const InfoAlert = ({ effect }) => {
+const InfoAlert = () => {
   return (
-    <div style={{ position: 'fixed', left: '10px', top: '10px', zIndex: 900 }}>
-      <h3>Informacje o efekcie</h3>
-      <p>{effect}</p>
+    <div className='alert-circle-info'>
+      <h3>Profilaktyka w momencie przebywania w strefie:</h3>
+      <p>Tutaj powinny być super ważne rzeczy z rozporządzenia, 
+        zrób sobie komponent w utilities z opisami każdej
+         a potem ładuj na podstawie klikniętego efektu</p>
     </div>
   );
 };

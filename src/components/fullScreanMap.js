@@ -4,6 +4,7 @@ import Circle from './Circle';
 import AboutCircle from './AboutCircle';
 import effectColors from '../ulilities/effectColors';
 import 'leaflet/dist/leaflet.css';
+import InfoAlert from './InfoAlert';
 
 const ChangeView = ({ center, zoom }) => {
   const map = useMap();
@@ -29,10 +30,15 @@ const FullScreenMap = ({
   const [selectedEffect, setSelectedEffect] = useState(null);
   const [mapCenter, setMapCenter] = useState(defaultPosition);
   const [mapZoom, setMapZoom] = useState(7);
-
+  const [showInfoAlert, setShowInfoAlert] = useState(false);
+  const [infoAlertData, setInfoAlertData] = useState(null);
+  
   const onEffectClick = useCallback((selectedEffect) => {
     setSelectedEffect(selectedEffect);
-  }, []);
+    const selectedData = circleInfo.find(item => item.effect === selectedEffect);
+    setInfoAlertData(selectedData);
+    setShowInfoAlert(true);
+  }, [circleInfo]);
 
   useEffect(() => {
     console.log("Aktualizacja współrzędnych miasta:", cityCoordinates);
@@ -49,6 +55,9 @@ const FullScreenMap = ({
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
       />
+      {showInfoAlert && infoAlertData && (
+        <InfoAlert data={infoAlertData}/>
+      )}
       {cityCoordinates && <ChangeView center={cityCoordinates} zoom={mapZoom} />}
       {cityCoordinates && selectedWarhead && shouldDrawCircle && (
         <Circle

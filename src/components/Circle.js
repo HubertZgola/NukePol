@@ -55,7 +55,7 @@ const Circle = ({ cityCoordinates, selectedWarhead = '20t', effects, explosionTy
                     const circle = L.circle(cityCoordinates, {
                         color: borderColor,
                         fillColor: effectColors[effect],
-                        fillOpacity: 0.1,
+                        fillOpacity: 0.2,
                         radius: effectRadius
                     }).addTo(map);
     
