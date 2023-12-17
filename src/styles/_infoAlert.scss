@@ -1,12 +1,12 @@
 .alert-circle-info {
     top: 15vh;
-    left: 3vw;
+    left: 5vw;
     border-radius: 15px;
     position: fixed;
     display: flex;
     flex-direction: column;
     width: 20vw;
-    height: 50vh;
+    height: 75vh;
     overflow: auto;
     background-color: #ffffff9d;
     box-shadow:0 12px 50px #333;
@@ -18,6 +18,10 @@
         padding: 1rem 0;
         font-size: 1.5rem;
     }
+    h4{
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+    }
     p{
         color: rgb(0, 0, 0);
         font-size: 1rem;
@@ -27,11 +31,19 @@
 
 @media only screen and (max-width: 1190px) {
     .alert-circle-info{
-        width: 94vw;
-        height: 30vh;
-        left: 3vw;
-        top: 62vh;
-        
-        
+        width: 30vw;
+        height: 45vh;
+        left: 65vw;
+        top: 15vh;
+        h3{
+            font-size: 1.1rem;
     }
+    h4{
+        font-size: 1rem;
+        margin-bottom: 1rem;
+    }
+    p{
+        font-size: 0.9rem;
+    }
+}
 }

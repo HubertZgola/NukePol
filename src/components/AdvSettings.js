@@ -11,6 +11,7 @@ const AdvSettings = ({ onEffectsChange }) => {
     ionizing6Sv: false,
     ionizing1Sv: false,
     ionizing01Sv: false,
+    ionizing0025Sv: false,
     Pierwszego: false,
     Drugiego: false,
     Trzeciego: false,
@@ -52,9 +53,9 @@ const AdvSettings = ({ onEffectsChange }) => {
         </label>
       ))}
       <h4>Pierścienie promieniowania jonizującego</h4>
-      {['20Sv', '6Sv', '1Sv', '01Sv'].map((Sv) => (
+      {['20Sv', '6Sv', '1Sv', '01Sv', '0025Sv'].map((Sv) => (
         <label key={Sv}>
-          <p>{`Dawka Promieniowania ${Sv === '01Sv' ? '0.1Sv' : Sv}`}</p>
+          <p>{`Dawka Promieniowania ${Sv === '01Sv' ? '0.1Sv' : (Sv === '0025Sv' ? '0.025Sv' : Sv)}`}</p>
           <input 
             type="checkbox" 
             name={`ionizing${Sv}`}

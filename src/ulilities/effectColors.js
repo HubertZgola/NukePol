@@ -9,6 +9,7 @@
     ionizing6Sv: '#077201',
     ionizing1Sv: '#089601',
     ionizing01Sv: '#0dff00',
+    ionizing0025Sv: '#a5fda0',
     Pierwszego: '#fffb00',
     Drugiego: '#fffc3a',
     Trzeciego: '#fffd7d',

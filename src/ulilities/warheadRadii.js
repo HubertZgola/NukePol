@@ -12,6 +12,7 @@ const warheadRadii = {
           ionizing6Sv: 289,
           ionizing1Sv: 443,
           ionizing01Sv: 698,
+          ionizing0025Sv: 883,
 
           Pierwszego: 181,
           Drugiego: 125,
@@ -19,7 +20,7 @@ const warheadRadii = {
           fireball: 7
       },
       '15kt': {
-        overpressure3000psi: 60,
+          overpressure3000psi: 60,
           overpressure200psi: 138,
           overpressure20psi: 380,
           overpressure5psi: 800,
@@ -29,6 +30,7 @@ const warheadRadii = {
           ionizing6Sv: 922,
           ionizing1Sv: 1180,
           ionizing01Sv: 1540,
+          ionizing0025Sv: 1794,
 
           Pierwszego: 2190,
           Drugiego: 1570,
@@ -46,6 +48,7 @@ const warheadRadii = {
         ionizing6Sv: 4920,
         ionizing1Sv: 5146,
         ionizing01Sv: 5544,
+        ionizing0025Sv: 5944,
 
         Pierwszego: 84550,
         Drugiego: 66551,
@@ -65,6 +68,7 @@ const warheadRadii = {
           ionizing6Sv: 267,
           ionizing1Sv: 430,
           ionizing01Sv: 689,
+          ionizing0025Sv: 876,
 
           Pierwszego: 185,
           Drugiego: 105,
@@ -82,6 +86,7 @@ const warheadRadii = {
           ionizing6Sv: 916,
           ionizing1Sv: 1174,
           ionizing01Sv: 1535,
+          ionizing0025Sv: 1789,
 
           Pierwszego: 2590,
           Drugiego: 1860,
@@ -99,9 +104,10 @@ const warheadRadii = {
           ionizing6Sv: 4919,
           ionizing1Sv: 5146,
           ionizing01Sv: 5544,
+          ionizing0025Sv: 5944,
 
           Pierwszego: 84550,
-          Drugiego: 66551,
+          Drugiego: 67329,
           Trzeciego: 54680,
           fireball: 6225
       }

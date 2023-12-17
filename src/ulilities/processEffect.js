@@ -1,6 +1,8 @@
 // Funkcja do przetwarzania wartości 'effect'
 const processEffect = (effect) => {
     switch (effect) {
+      case 'ionizing0025Sv':
+        return "Promieniowanie Jonizujące 0.025Sv";
       case 'ionizing01Sv':
         return "Promieniowanie Jonizujące 0.1Sv";
         case 'ionizing1Sv':

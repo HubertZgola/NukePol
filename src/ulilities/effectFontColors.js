@@ -8,6 +8,7 @@ const effectFontColors ={
     ionizing6Sv: '#ffffff',
     ionizing1Sv: '#000000',
     ionizing01Sv: '#000000',
+    ionizing0025Sv: '#000000',
     Pierwszego: '#000000',
     Drugiego: '#000000',
     Trzeciego: '#000000',

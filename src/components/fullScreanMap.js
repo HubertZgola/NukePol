@@ -5,6 +5,8 @@ import AboutCircle from './AboutCircle';
 import effectColors from '../ulilities/effectColors';
 import 'leaflet/dist/leaflet.css';
 import InfoAlert from './InfoAlert';
+import preventionInfo from '../ulilities/preventionInfo';
+import processEffect from '../ulilities/processEffect';
 
 const ChangeView = ({ center, zoom }) => {
   const map = useMap();
@@ -36,8 +38,14 @@ const FullScreenMap = ({
   const onEffectClick = useCallback((selectedEffect) => {
     setSelectedEffect(selectedEffect);
     const selectedData = circleInfo.find(item => item.effect === selectedEffect);
-    setInfoAlertData(selectedData);
-    setShowInfoAlert(true);
+    if (selectedData) {
+      setInfoAlertData({
+        ...selectedData,
+        effectName: processEffect(selectedEffect),
+        prophylaxisInfo: preventionInfo[selectedEffect] || "Brak dostępnych informacji."
+      });
+      setShowInfoAlert(true);
+    }
   }, [circleInfo]);
 
   useEffect(() => {

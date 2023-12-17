@@ -44,7 +44,7 @@ const Settings = ({ isOpen, onDetonate, setIsOpen, setSelectedWarhead, handleCit
         handleDetonateClick={handleDetonateClick}
         setSelectedWarhead={setSelectedWarhead} 
         handleCityChange={handleCityChange}
-        setExplosionType={setExplosionType} // Przekazywanie setExplosionType do BasicSettings
+        setExplosionType={setExplosionType}
       />
       <AdvSettings onEffectsChange={onEffectsChange}/>
       <DataSettings />

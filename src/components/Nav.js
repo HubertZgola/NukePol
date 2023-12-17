@@ -17,6 +17,7 @@ const Nav = ({ onDetonate, setSelectedWarhead, handleCityChange, onEffectsChange
     setSelectedWarhead('20t');
     setExplosionType('SurfaceExplosion');
     setSimulationEffects({
+      ionizing0025Sv: false,
       ionizing01Sv: false,
       ionizing1Sv: false,
       ionizing6Sv: false,
