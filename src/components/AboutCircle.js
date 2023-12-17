@@ -3,8 +3,7 @@ import effectFontColors from '../ulilities/effectFontColors';
 import processEffect from '../ulilities/processEffect';
 
 const AboutCircle = ({data, currentEffectColors, onEffectClick }) => {
-  // const circleData = data && data[0] ? data[0] : [];
-  console.log("data:", data);
+  // console.log("data:", data);
   // console.log("circleData:", circleData);
   
   const [selectedEffect, setSelectedEffect] = useState(null);
@@ -14,10 +13,13 @@ const AboutCircle = ({data, currentEffectColors, onEffectClick }) => {
     onEffectClick(effect);
   };
 
+  // Kopiowanie i sortowanie danych według 'circleArea'
+  const sortedData = [...data].sort((a, b) => b.distance - a.distance);
+
   return (
     <div className="about-circle-info">
       <h2>Informacje o efektach:</h2>
-      {data.map((item, index) => (
+      {sortedData.map((item, index) => (
         <div 
           key={index} 
           onClick={() => localHandleEffectClick(item.effect, index)} 
@@ -35,6 +37,7 @@ const AboutCircle = ({data, currentEffectColors, onEffectClick }) => {
         </div>
       ))}
     </div>
-);
+  );
 }
+
 export default AboutCircle;

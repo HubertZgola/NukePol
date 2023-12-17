@@ -65,8 +65,8 @@ const Circle = ({ cityCoordinates, selectedWarhead = '20t', effects, explosionTy
     
                     circleData.push({
                         effect: effect,
-                        distance: distance.toFixed(2),
-                        circleArea: circleArea.toFixed(2)
+                        distance: distance.toFixed(3),
+                        circleArea: circleArea.toFixed(3)
                     });
     
                     // Zapisywanie okręgu w referencji
