@@ -1,3 +1,7 @@
+![image](https://github.com/HubertZgola/NukePol/assets/99662754/5b49157b-a89a-4f43-8bfb-9c542634688f)
+![image](https://github.com/HubertZgola/NukePol/assets/99662754/7b461d34-ff05-452b-8845-1711c87c72e5)
+![image](https://github.com/HubertZgola/NukePol/assets/99662754/e911bedb-2641-4eeb-89e6-a1eeddbb2f3e)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
