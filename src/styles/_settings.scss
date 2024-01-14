@@ -19,12 +19,14 @@
             padding: 10px;
             width: 100%;
             border-radius: 10px;
+            background: none;
           }
         
           select{
             padding: 10px;
             width: 100%;
             border-radius: 10px;
+            background: none;
         }
           h2{
             font-size: 1.7rem;
@@ -32,7 +34,7 @@
         }
           h3{
             margin: 1rem 0;
-            font-size: 1.2rem;           
+            font-size: 1.2rem;         
         }
         
         .settings-container-element{
@@ -67,7 +69,13 @@
             padding: 1rem;
             width: 100%;
             border-radius: 2rem;
-          }      
+          }    
+          .generate{
+            @extend .danger;
+            background: white;
+            color: red;
+            margin-top: 2rem;
+          }  
         }      
     }
     }

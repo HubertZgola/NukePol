@@ -1,40 +1,48 @@
 import React from 'react';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 
 const DataSettings = () => {
+  const downloadPdfDocument = () => {
+    const input = document.body;
+    html2canvas(input, { scale: 2 }) // scale może być dostosowane do potrzeb
+      .then((canvas) => {
+        const imgData = canvas.toDataURL('image/png');
+        const pdf = new jsPDF({
+          orientation: "landscape",
+          unit: "px",
+          format: [canvas.width, canvas.height]
+        });
+        pdf.addImage(imgData, 'PNG', 0, 0, canvas.width, canvas.height);
+        pdf.save("raport.pdf");  
+      });
+  }
+  
+
   return (
     <div className="settings-container-element">
-        <h2>USTAWIENIA DANYCH</h2>
-      <h3>Generuj Wykres</h3>
+      <h2>GENERUJ RAPORT</h2>
       <label>
-        <p>Wykres w przeglądarce</p>
-        <input type="checkbox" name=""/>
+        <h3>Wykres zależności dawki promieniowania<br />pomiędzy odległością a centrum wybuchu</h3>
+          <input type="checkbox" name=""/>
       </label>
       <label>
-        <p>Wykres eksportowany do pliku .csv</p>
-        <input type="checkbox" name=""/>
+        <h3>Wykres zależności nadciśnienia <br />a odległością centrum wybuchu</h3>
+          <input type="checkbox" name=""/>
       </label>
       <label>
-        <p>Wykres eksportowany do pliku .xltm</p>
-        <input type="checkbox" name=""/>
-      </label>
-      <h3>Generuj Tabelę</h3>
-      <label>
-        <p>Tabela w przeglądarce</p>
-        <input type="checkbox" name=""/>
+        <h3>Tabela zależności dawki promieniowania<br />pomiędzy odległością a centrum wybuchu</h3>
+          <input type="checkbox" name=""/>
       </label>
       <label>
-        <p>Tabela eksportowana do pliku .xltm</p>
-        <input type="checkbox" name=""/>
-      </label>
-      <h3>Wizualizacja</h3>
-      <label>
-        <p>Wymiary chmury grzybowej</p>
-        <input type="checkbox" name="cloud"/>
+        <h3>Tabela zależności nadciśnienia <br />a odległością centrum wybuchu</h3>
+          <input type="checkbox" name=""/>
       </label>
       <label>
-        <p>Krater</p>
-        <input type="checkbox" name="crater"/>
+        <h3>Wymiary chmury grzyba atomowego</h3>
+          <input type="checkbox" name=""/>
       </label>
+      <button className="generate" onClick={downloadPdfDocument}>Pobierz Raport</button>
     </div>
   );
 };
