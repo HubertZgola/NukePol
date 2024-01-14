@@ -4,6 +4,13 @@ import FullScreenMap from './components/fullScreanMap';
 import Nav from './components/Nav';
 import 'leaflet/dist/leaflet.css';
 import Footer from './components/Footer';
+import ReportGenerator from './components/ReportGenerator';
+// import BasicSettings from './BasicSettings';
+// import AdvSettings from './AdvSettings';
+// import DataSettings from './DataSettings';
+import ReactDOM from 'react-dom';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 
 const App = () => {
   const [cityCoordinates, setCityCoordinates] = useState(null);
@@ -12,6 +19,8 @@ const App = () => {
   const [shouldDrawCircle, setShouldDrawCircle] = useState(false);
   const [isDetonated, setIsDetonated] = useState(false);
   const [mapKey, setMapKey] = useState(Date.now());
+  const [basicSettings, setBasicSettings] = useState({});
+  const [advancedSettings, setAdvancedSettings] = useState({});
   const [simulationEffects, setSimulationEffects] = useState({
     overpressure3000psi: false,
     overpressure200psi: false,
@@ -29,6 +38,16 @@ const App = () => {
   });
   const [circleInfo, setCircleInfo] = useState([]);
 
+  const updateBasicSettings = (type, value) => {
+    setBasicSettings(prevSettings => ({ ...prevSettings, [type]: value }));
+  };
+  
+  // W App.js
+const handleWarheadChange = (newWarhead) => {
+  setBasicSettings(prevSettings => ({ ...prevSettings, selectedWarhead: newWarhead }));
+};
+
+
   const updateCircleInfo = useCallback((newInfo) => {
     setCircleInfo(newInfo);
     // setCircleInfo(prevInfo => [...prevInfo, newInfo]);
@@ -42,11 +61,12 @@ const App = () => {
   };
 
   const handleCityChange = (newCity) => {
+    setBasicSettings(prevSettings => ({ ...prevSettings, city: newCity }));
     setShouldDrawCircle(false);
     setCityCoordinates(null);
     setCircleInfo([]); // Resetowanie informacji o efektach przy zmianie miasta
   };
-
+  
   const handleEffectsChange = (newEffects) => {
     setSimulationEffects(prevEffects => ({ ...prevEffects, ...newEffects }));
   };
@@ -58,7 +78,26 @@ const App = () => {
     setMapKey(Date.now());
     setCircleInfo([]); // Resetowanie informacji o efektach przy czyszczeniu detonacji
   };
+  const generateReport = () => {
+    const reportData = { basicSettings, advancedSettings, dataSettings:{}};
+    const reportElement = document.createElement('div');
+    document.body.appendChild(reportElement);
+    ReactDOM.render(<ReportGenerator {...reportData} />, reportElement);
 
+    html2canvas(reportElement, { scale: 2 }).then((canvas) => {
+      const imgData = canvas.toDataURL('image/png');
+      const pdf = new jsPDF({
+        orientation: 'portrait',
+        unit: 'px',
+        format: 'a4',
+      });
+      pdf.addImage(imgData, 'PNG', 0, 0);
+      pdf.save('raport.pdf');
+
+      ReactDOM.unmountComponentAtNode(reportElement);
+      document.body.removeChild(reportElement);
+    });
+  };
 
   return (
     <div>
@@ -71,6 +110,10 @@ const App = () => {
         isDetonated={isDetonated}
         clearDetonation={clearDetonation}
         setSimulationEffects={setSimulationEffects}
+        generateReport={generateReport}
+        setBasicSettings={setBasicSettings}
+        updateBasicSettings={updateBasicSettings}
+        handleWarheadChange={handleWarheadChange}
       />
       <FullScreenMap 
         key={mapKey}

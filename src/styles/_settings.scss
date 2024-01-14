@@ -12,7 +12,7 @@
         // border: 1px solid red;  
         margin-top: 6rem;
         display: flex;
-        justify-content: space-around;
+        justify-content: center;
         width: 90vw;
         height: 100vh;
         input {
@@ -38,9 +38,10 @@
         }
         
         .settings-container-element{
-          width: 30%;
+          width: 40%;
           height: 70%;
           border-radius: 50px;
+          margin: 1rem;
           padding: 2rem;
           background: #3333333d;
           box-shadow:0 1rem 20rem #333;

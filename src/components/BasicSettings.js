@@ -1,10 +1,12 @@
 import React from 'react';
 
-const BasicSettings = ({ city, setCity, handleDetonateClick, setSelectedWarhead, handleCityChange, setExplosionType }) => {
+const BasicSettings = ({city, handleWarheadChange, updateBasicSettings, setCity, handleDetonateClick, setSelectedWarhead, handleCityChange, setExplosionType }) => {
 
-  const handleWarheadChange = (e) => {
-    setSelectedWarhead(e.target.value);
-  };
+  // const handleWarheadChange = (e) => {
+  //   const newWarhead = e.target.value;
+  //   setSelectedWarhead(newWarhead); // Aktualizacja lokalnego stanu
+  //   handleWarheadChange(newWarhead); // Aktualizacja globalnego stanu w App.js
+  // };
 
   const onCityInputChange = (e) => {
     setCity(e.target.value);
@@ -12,7 +14,9 @@ const BasicSettings = ({ city, setCity, handleDetonateClick, setSelectedWarhead,
   };
 
   const handleExplosionTypeChange = (e) => {
-    setExplosionType(e.target.value);
+    const newType = e.target.value;
+    setExplosionType(newType); // Aktualizacja lokalnego stanu
+    updateBasicSettings('explosionType', newType); // Aktualizacja globalnego stanu w App.js
   };
 
   return (
@@ -50,7 +54,10 @@ const BasicSettings = ({ city, setCity, handleDetonateClick, setSelectedWarhead,
         </label>
       </div>
       <h3>Wybierz rodzaj głowicy</h3>
-      <select onChange={handleWarheadChange}>
+      <select onChange={(e) => {
+      setSelectedWarhead(e.target.value); // Aktualizacja lokalnego stanu
+      handleWarheadChange(e.target.value); // Aktualizacja globalnego stanu w App.js
+    }}>
         <option value="20t">„Davy Crockett” – USA (20 t)</option>
         <option value="15kt">„Little Boy” – bomba w Hiroszimie (15 kt)</option>
         <option value="100Mt">„Car Bomba” - największa zaprojektowana bomba ZSRR (100 Mt)</option>

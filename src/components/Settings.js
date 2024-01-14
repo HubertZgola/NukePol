@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import BasicSettings from './BasicSettings';
 import AdvSettings from './AdvSettings';
-import DataSettings from './DataSettings';
 
-const Settings = ({ isOpen, onDetonate, setIsOpen, setSelectedWarhead, handleCityChange, onEffectsChange, setExplosionType }) => {
+const Settings = ({ isOpen, handleWarheadChange, updateBasicSettings, setBasicSettings, generateReport, onDetonate, setIsOpen, setSelectedWarhead, handleCityChange, onEffectsChange, setExplosionType }) => {
   const [city, setCity] = useState('');
+  
 
   const findCityCoordinates = async (cityName) => {
     const url = `https://nominatim.openstreetmap.org/search?city=${encodeURIComponent(cityName)}&format=json&addressdetails=1&limit=1`;
@@ -35,7 +35,7 @@ const Settings = ({ isOpen, onDetonate, setIsOpen, setSelectedWarhead, handleCit
       setIsOpen(false);
     }
   };
-
+  
   return isOpen && (
     <div className="settings-container">
       <BasicSettings 
@@ -45,9 +45,20 @@ const Settings = ({ isOpen, onDetonate, setIsOpen, setSelectedWarhead, handleCit
         setSelectedWarhead={setSelectedWarhead} 
         handleCityChange={handleCityChange}
         setExplosionType={setExplosionType}
+        generateReport={generateReport}
+        setBasicSettings={setBasicSettings}
+        updateBasicSettings={updateBasicSettings}
+        handleWarheadChange={handleWarheadChange}
       />
-      <AdvSettings onEffectsChange={onEffectsChange}/>
-      <DataSettings />
+      <AdvSettings 
+        onEffectsChange={onEffectsChange}
+        generateReport={generateReport}
+      />
+      {/* <DataSettings 
+        settings={dataSettings}
+        setSettings={setDataSettings}
+        generateReport={generateReport}
+      /> */}
     </div>
   );
 };

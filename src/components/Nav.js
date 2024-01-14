@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import Settings from './Settings';
 
-const Nav = ({ onDetonate, setSelectedWarhead, handleCityChange, onEffectsChange, isDetonated, clearDetonation, setExplosionType, setSimulationEffects }) => {
+const Nav = ({ onDetonate, handleWarheadChange, updateBasicSettings, setBasicSettings, generateReport, setSelectedWarhead, handleCityChange, onEffectsChange, isDetonated, clearDetonation, setExplosionType, setSimulationEffects }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleSettings = () => {
@@ -40,6 +40,7 @@ const Nav = ({ onDetonate, setSelectedWarhead, handleCityChange, onEffectsChange
         <h1>Nuke<span>Pol</span></h1>
         <button onClick={toggleSettings}>Ustawienia Detonacji</button>
         {isDetonated && <button onClick={clearDetonation}>Wyczyść Detonacje</button>}
+        {isDetonated && <button onClick={generateReport}>Pobierz Raport</button>}
       </nav>
 
       <div className={`settings ${isOpen ? 'active' : ''}`}>
@@ -51,6 +52,10 @@ const Nav = ({ onDetonate, setSelectedWarhead, handleCityChange, onEffectsChange
           handleCityChange={handleCityChange}
           onEffectsChange={onEffectsChange}
           setExplosionType={setExplosionType}
+          generateReport={generateReport}
+          setBasicSettings={setBasicSettings}
+          updateBasicSettings={updateBasicSettings}
+          handleWarheadChange={handleWarheadChange}
         />
       </div>
     </>
