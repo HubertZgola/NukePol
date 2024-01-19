@@ -26,7 +26,7 @@ const FullScreenMap = ({
   setCircleInfo,
   circleInfo
 }) => {
-  console.log('Renderowanie FullScreenMap');
+  // console.log('Renderowanie FullScreenMap');
   const zoomLevel = 10;
   const defaultPosition = useMemo(() => [52.0693, 19.4803], []);
   const [selectedEffect, setSelectedEffect] = useState(null);
@@ -49,8 +49,8 @@ const FullScreenMap = ({
   }, [circleInfo]);
 
   useEffect(() => {
-    console.log("Aktualizacja współrzędnych miasta:", cityCoordinates);
-    console.log("Poziom zoomu:", zoomLevel);
+    // console.log("Aktualizacja współrzędnych miasta:", cityCoordinates);
+    // console.log("Poziom zoomu:", zoomLevel);
     if (cityCoordinates) {
       setMapCenter(cityCoordinates);
       setMapZoom(zoomLevel);

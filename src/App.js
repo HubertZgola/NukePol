@@ -8,7 +8,8 @@ import ReportGenerator from './components/ReportGenerator';
 // import BasicSettings from './BasicSettings';
 // import AdvSettings from './AdvSettings';
 // import DataSettings from './DataSettings';
-import ReactDOM from 'react-dom';
+// import Circle from './components/Circle';
+import { createRoot } from 'react-dom/client';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 
@@ -79,24 +80,38 @@ const handleWarheadChange = (newWarhead) => {
     setCircleInfo([]); // Resetowanie informacji o efektach przy czyszczeniu detonacji
   };
   const generateReport = () => {
-    const reportData = { basicSettings, advancedSettings, dataSettings:{}};
+    const reportData = { 
+      basicSettings, 
+      advancedSettings, 
+      dataSettings: {}, 
+      circleData: circleInfo
+    };
+  
     const reportElement = document.createElement('div');
     document.body.appendChild(reportElement);
-    ReactDOM.render(<ReportGenerator {...reportData} />, reportElement);
-
-    html2canvas(reportElement, { scale: 2 }).then((canvas) => {
-      const imgData = canvas.toDataURL('image/png');
-      const pdf = new jsPDF({
-        orientation: 'portrait',
-        unit: 'px',
-        format: 'a4',
+  
+    const root = createRoot(reportElement);
+    root.render(<ReportGenerator {...reportData} />);
+  
+    setTimeout(() => {
+      html2canvas(reportElement, { scale: 2 }).then((canvas) => {
+        const imgData = canvas.toDataURL('image/png');
+        const pdf = new jsPDF({
+          orientation: 'landscape',
+          unit: 'px',
+          format: 'a3',
+        });
+        pdf.addImage(imgData, 'PNG', 0, 0);
+        pdf.save('RaportSymulacyjny.pdf');
+  
+        root.unmount();
+        document.body.removeChild(reportElement);
+      }).catch(error => {
+        console.error('Error generating canvas:', error);
+        root.unmount();
+        document.body.removeChild(reportElement);
       });
-      pdf.addImage(imgData, 'PNG', 0, 0);
-      pdf.save('raport.pdf');
-
-      ReactDOM.unmountComponentAtNode(reportElement);
-      document.body.removeChild(reportElement);
-    });
+    }, 1000); // Opóźnienie o 1000ms (1 sekunda)
   };
 
   return (
