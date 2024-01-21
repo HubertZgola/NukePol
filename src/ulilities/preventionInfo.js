@@ -78,6 +78,7 @@ const preventionInfo = {
     Możemy natomiast zastosować leki dedykowane oparzeniom, polecone przez lekarza lub farmaceutę. 
     Nie należy także samodzielnie przekłuwać pęcherzy, bo może dojść do zakażenia. 
     Tę czynność, może wykonać wyłącznie osoba wykwalifikowana. 
+    (https://ratownictwomedyczne.mz.gov.pl/bez-kategorii/pierwsza-pomoc-w-przypadku-oparzenia/)
     `,
     
     Drugiego: `
@@ -87,6 +88,7 @@ const preventionInfo = {
     (przyjmując, że 1% powierzchni ciała, to mniej więcej wielkość dłoni osoby poszkodowanej)
     ,należy udać się na SOR lub wezwać pogotowie ratunkowe.
     Próby samodzielnego leczenia takich obrażeń ciała, mogę spowodować zaostrzenie dolegliwości i pogłębić ból. 
+    (https://ratownictwomedyczne.mz.gov.pl/bez-kategorii/pierwsza-pomoc-w-przypadku-oparzenia/)
     `,
     
     Trzeciego: `
@@ -99,6 +101,7 @@ const preventionInfo = {
     (przyjmując, że 1% powierzchni ciała, to mniej więcej wielkość dłoni osoby poszkodowanej)
     , należy udać się na SOR lub wezwać pogotowie ratunkowe.
     Próby samodzielnego leczenia takich obrażeń ciała, mogę spowodować zaostrzenie dolegliwości i pogłębić ból.
+    (https://ratownictwomedyczne.mz.gov.pl/bez-kategorii/pierwsza-pomoc-w-przypadku-oparzenia/)
     `,
     
     fireball: `

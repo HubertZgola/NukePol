@@ -1,15 +1,27 @@
 import React, { useEffect, useRef, useCallback } from 'react';
-import { useMap } from 'react-leaflet';
-import L from 'leaflet';
+import { useMap } from 'react-leaflet'; // Hook do uzyskiwania dostępu do mapy Leaflet
+import L from 'leaflet'; // Import biblioteki Leaflet
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
+import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons'; // Import ikon z FontAwesome
 import ReactDOMServer from 'react-dom/server';
-import warheadRadii from '../ulilities/warheadRadii';
+import warheadRadii from '../ulilities/warheadRadii'; // Dane o promieniach głowic
 
-const Circle = ({ cityCoordinates, selectedWarhead = '20t', effects, explosionType, setCircleInfo, effectColors, onEffectClick, selectedEffect }) => {
-    const map = useMap();
-    const circlesRef = useRef(new Map());  // Dodana referencja do przechowywania okręgów
+// Komponent Circle służy do rysowania okręgów na mapie
+const Circle = ({ 
+        cityCoordinates, 
+        selectedWarhead = '20t', 
+        effects, 
+        explosionType, 
+        setCircleInfo, 
+        effectColors, 
+        onEffectClick, 
+        selectedEffect 
+    }) => {
+    
+    const map = useMap(); // Uzyskanie dostępu do instancji mapy
+    const circlesRef = useRef(new Map()); // Referencja do przechowywania okręgów
 
+    // Tworzenie niestandardowej ikony markera
     const customMarkerIcon = L.divIcon({
         html: ReactDOMServer.renderToString(<FontAwesomeIcon icon={faMapMarkerAlt} size="2x" />),
         className: 'my-custom-pin',
@@ -29,24 +41,21 @@ const Circle = ({ cityCoordinates, selectedWarhead = '20t', effects, explosionTy
                   Math.cos(φ1) * Math.cos(φ2) *
                   Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
         const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-
-        console.log(`Obliczona odległość dla lat1=${lat1}, lon1=${lon1}, lat2=${lat2}, lon2=${lon2}:`, (R * c) / 1000);
         return (R * c) / 1000; // Wynik w kilometrach
     };
 
+    // Funkcja obliczająca powierzchnię koła
     const calculateCircleArea = (r) => {
-        console.log(`Obliczona powierzchnia koła dla promienia ${r}:`, Math.PI * r * r);
         return Math.PI * r * r;
     };
 
+    // Funkcja generująca dane o okręgach
     const generateCircleData = useCallback(() => {
         let circleData = [];
-        console.log("Wywołanie generateCircleData");
-        console.log("Wygenerowane circleData:", circleData);
+        // Dodanie markera na mapie
         L.marker(cityCoordinates, { icon: customMarkerIcon }).addTo(map);
-
-
-        console.log('Rozpoczęcie generowania danych koła');
+        
+        // Generowanie okręgów na podstawie aktywnych efektów
         Object.entries(effects).forEach(([effect, isActive]) => {
             if (isActive) {
                 const effectRadius = warheadRadii[explosionType]?.[selectedWarhead]?.[effect];
@@ -77,19 +86,21 @@ const Circle = ({ cityCoordinates, selectedWarhead = '20t', effects, explosionTy
     
         return circleData;
     }, [cityCoordinates, selectedWarhead, effects, explosionType, customMarkerIcon, map, effectColors]);
-// eslint-disable-next-line react-hooks/exhaustive-deps    
+    
+    // Efekt aktualizujący dane okręgów
     useEffect(() => {
         const circleData = generateCircleData();
         if (circleData && circleData.length > 0) {
-            console.log("Generated circleData in Circle:", circleData);
+            // Aktualizacja informacji o okręgach
             setCircleInfo(circleData);
         }
     }, [cityCoordinates, selectedWarhead, effects, explosionType, setCircleInfo]);
     
-
+    // Efekt aktualizujący styl okręgów
     useEffect(() => {
         if (selectedEffect !== null) {
-          circlesRef.current.forEach((circle, key) => {
+        // Aktualizacja stylu okręgów na podstawie wybranego efektu
+        circlesRef.current.forEach((circle, key) => {
             circle.setStyle({ color: key === selectedEffect ? 'blue' : effectColors[key] });
           });
         }

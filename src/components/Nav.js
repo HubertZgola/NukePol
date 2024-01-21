@@ -1,30 +1,50 @@
 // Nav.js
 import React, { useState } from 'react';
+// Import komponentu ustawień
 import Settings from './Settings';
 
-const Nav = ({ onDetonate, handleWarheadChange, updateBasicSettings, setBasicSettings, generateReport, setSelectedWarhead, handleCityChange, onEffectsChange, isDetonated, clearDetonation, setExplosionType, setSimulationEffects }) => {
+// Komponent Nav zarządza nawigacją i ustawieniami aplikacji.
+const Nav = ({ 
+    onDetonate, 
+    handleWarheadChange, 
+    updateBasicSettings, 
+    setBasicSettings, 
+    generateReport, 
+    setSelectedWarhead, 
+    handleCityChange, 
+    onEffectsChange, 
+    isDetonated, 
+    clearDetonation, 
+    setExplosionType, 
+    setSimulationEffects 
+  }) => {
+  
+  // Lokalny stan do zarządzania widocznością ustawień.
   const [isOpen, setIsOpen] = useState(false);
-
+  
+  // Funkcja do przełączania widoczności panelu ustawień.
   const toggleSettings = () => {
     setIsOpen(!isOpen);
-    
+    // Resetowanie ustawień przy otwieraniu panelu
     if(!isOpen){
       resetSettings();
     }
   };
 
+  // Funkcja resetująca ustawienia symulacji do wartości domyślnych.
   const resetSettings = () => {
     setSelectedWarhead('20t');
     setExplosionType('SurfaceExplosion');
+    // Resetowanie efektów symulacji
     setSimulationEffects({
       ionizing0025Sv: false,
       ionizing01Sv: false,
-      ionizing1Sv: false,
-      ionizing6Sv: false,
-      ionizing20Sv: false,
-      overpressure1psi: false,
-      overpressure5psi: false,
-      overpressure20psi: false,
+      ionizing1Sv: true,
+      ionizing6Sv: true,
+      ionizing20Sv: true,
+      overpressure1psi: true,
+      overpressure5psi: true,
+      overpressure20psi: true,
       overpressure200psi: false,
       overpressure3000psi: false,
       Pierwszego: false,
@@ -34,6 +54,7 @@ const Nav = ({ onDetonate, handleWarheadChange, updateBasicSettings, setBasicSet
     });
   };
 
+  // Renderowanie komponentu
   return (
     <>
       <nav className="navbar">

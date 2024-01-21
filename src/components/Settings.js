@@ -2,10 +2,24 @@ import React, { useState } from 'react';
 import BasicSettings from './BasicSettings';
 import AdvSettings from './AdvSettings';
 
-const Settings = ({ isOpen, handleWarheadChange, updateBasicSettings, setBasicSettings, generateReport, onDetonate, setIsOpen, setSelectedWarhead, handleCityChange, onEffectsChange, setExplosionType }) => {
+// Komponent Settings zarządza ustawieniami symulacji.
+const Settings = ({ 
+    isOpen, 
+    handleWarheadChange, 
+    updateBasicSettings, 
+    setBasicSettings, 
+    generateReport, 
+    onDetonate, 
+    setIsOpen, 
+    setSelectedWarhead, 
+    handleCityChange, 
+    onEffectsChange, 
+    setExplosionType 
+  }) => {
+  // Lokalny stan przechowujący nazwę miasta dla ustawień.
   const [city, setCity] = useState('');
   
-
+  // Funkcja wyszukująca współrzędne miasta na podstawie jego nazwy.
   const findCityCoordinates = async (cityName) => {
     const url = `https://nominatim.openstreetmap.org/search?city=${encodeURIComponent(cityName)}&format=json&addressdetails=1&limit=1`;
 
@@ -28,14 +42,18 @@ const Settings = ({ isOpen, handleWarheadChange, updateBasicSettings, setBasicSe
     }
   };
 
+  // Funkcja obsługująca kliknięcie przycisku detonacji.
   const handleDetonateClick = async () => {
     const coordinates = await findCityCoordinates(city);
     if (coordinates) {
+       // Wywołanie funkcji z props naDetonate z znalezionymi współrzędnymi.
       onDetonate(coordinates);
+      // Zamykanie panelu ustawień.
       setIsOpen(false);
     }
   };
   
+   // Renderowanie komponentu tylko gdy jest otwarty (isOpen).
   return isOpen && (
     <div className="settings-container">
       <BasicSettings 
@@ -54,11 +72,6 @@ const Settings = ({ isOpen, handleWarheadChange, updateBasicSettings, setBasicSe
         onEffectsChange={onEffectsChange}
         generateReport={generateReport}
       />
-      {/* <DataSettings 
-        settings={dataSettings}
-        setSettings={setDataSettings}
-        generateReport={generateReport}
-      /> */}
     </div>
   );
 };

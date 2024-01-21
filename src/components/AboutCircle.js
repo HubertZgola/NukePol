@@ -1,16 +1,17 @@
 import React, {useState} from 'react';
-import effectFontColors from '../ulilities/effectFontColors';
-import processEffect from '../ulilities/processEffect';
+import effectFontColors from '../ulilities/effectFontColors'; // Import kolorów czcionki dla różnych efektów
+import processEffect from '../ulilities/processEffect'; // Funkcja do przetwarzania nazw efektów
 
+// Komponent AboutCircle wyświetla informacje o efektach symulacji
 const AboutCircle = ({data, currentEffectColors, onEffectClick }) => {
-  // console.log("data:", data);
-  // console.log("circleData:", circleData);
   
+  // Lokalny stan do przechowywania wybranego efektu
   const [selectedEffect, setSelectedEffect] = useState(null);
 
+  // Lokalna funkcja obsługująca kliknięcie na efekt
   const localHandleEffectClick = (effect, index) => {
-    setSelectedEffect(index);
-    onEffectClick(effect);
+    setSelectedEffect(index); // Ustawienie wybranego efektu
+    onEffectClick(effect); // Wywołanie funkcji przekazanej przez props
   };
 
   // Kopiowanie i sortowanie danych według 'circleArea'

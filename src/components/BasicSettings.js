@@ -1,24 +1,31 @@
 import React from 'react';
 
-const BasicSettings = ({city, handleWarheadChange, updateBasicSettings, setCity, handleDetonateClick, setSelectedWarhead, handleCityChange, setExplosionType }) => {
-
-  // const handleWarheadChange = (e) => {
-  //   const newWarhead = e.target.value;
-  //   setSelectedWarhead(newWarhead); // Aktualizacja lokalnego stanu
-  //   handleWarheadChange(newWarhead); // Aktualizacja globalnego stanu w App.js
-  // };
-
+// Komponent BasicSettings odpowiada za ustawienia podstawowe symulacji.
+const BasicSettings = ({
+    city, 
+    handleWarheadChange, 
+    updateBasicSettings, 
+    setCity, 
+    handleDetonateClick, 
+    setSelectedWarhead, 
+    handleCityChange, 
+    setExplosionType 
+  }) => {
+  
+  // Funkcja obsługująca zmianę miasta.
   const onCityInputChange = (e) => {
-    setCity(e.target.value);
-    handleCityChange(e.target.value);
+    setCity(e.target.value); // Aktualizacja lokalnego stanu miasta
+    handleCityChange(e.target.value); // Aktualizacja globalnego stanu w App.js
   };
 
+  // Funkcja obsługująca zmianę typu wybuchu.
   const handleExplosionTypeChange = (e) => {
     const newType = e.target.value;
     setExplosionType(newType); // Aktualizacja lokalnego stanu
     updateBasicSettings('explosionType', newType); // Aktualizacja globalnego stanu w App.js
   };
 
+  // Renderowanie interfejsu użytkownika
   return (
     <div className="settings-container-element">
       <h2>PODSTAWOWE USTAWIENIA</h2>

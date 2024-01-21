@@ -1,24 +1,29 @@
 import React, { useState } from 'react';
 
+// Komponent AdvSettings odpowiada za zaawansowane ustawienia symulacji.
 const AdvSettings = ({ onEffectsChange }) => {
+  // Stan przechowujący informacje o aktywnych efektach w symulacji.
   const [effects, setEffects] = useState({
-    overpressure3000psi: false,
-    overpressure200psi: false,
-    overpressure20psi: false,
-    overpressure5psi: false,
-    overpressure1psi: false,
-    ionizing20Sv: false,
-    ionizing6Sv: false,
-    ionizing1Sv: false,
-    ionizing01Sv: false,
+    // Lista efektów z początkowymi wartościami true/false
     ionizing0025Sv: false,
+    ionizing01Sv: false,
+    ionizing1Sv: true,
+    ionizing6Sv: true,
+    ionizing20Sv: true,
+    overpressure1psi: true,
+    overpressure5psi: true,
+    overpressure20psi: true,
+    overpressure200psi: false,
+    overpressure3000psi: false,
     Pierwszego: false,
     Drugiego: false,
     Trzeciego: false,
     fireball: false
   });
 
+   // Funkcja do przełączania stanu poszczególnych efektów
   const toggleEffect = (effectName) => {
+    // Aktualizacja stanu efektu oraz przekazanie zmian do komponentu nadrzędnego
     const updatedEffects = {
       ...effects,
       [effectName]: !effects[effectName]
@@ -26,7 +31,8 @@ const AdvSettings = ({ onEffectsChange }) => {
     setEffects(updatedEffects);
     onEffectsChange(updatedEffects);
   };
-
+  
+  // Renderowanie interfejsu użytkownika
   return (
     <div className="settings-container-element">
       <h2>ZAAWANSOWANE USTAWIENIA</h2>

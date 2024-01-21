@@ -1,19 +1,18 @@
 import React, { useState, useCallback } from 'react';
 import './styles/app.scss';
-import FullScreenMap from './components/fullScreanMap';
+import FullScreenMap from './components/fullScreenMap';
 import Nav from './components/Nav';
-import 'leaflet/dist/leaflet.css';
+import 'leaflet/dist/leaflet.css'; // Importowanie stylów dla Leaflet, biblioteki map.
 import Footer from './components/Footer';
 import ReportGenerator from './components/ReportGenerator';
-// import BasicSettings from './BasicSettings';
-// import AdvSettings from './AdvSettings';
-// import DataSettings from './DataSettings';
-// import Circle from './components/Circle';
-import { createRoot } from 'react-dom/client';
-import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
+import { createRoot } from 'react-dom/client'; // Import do renderowania komponentów React.
+import jsPDF from 'jspdf'; // Biblioteka do generowania dokumentów PDF.
+import html2canvas from 'html2canvas';  // Biblioteka do konwersji HTML na canvas, używana w generowaniu raportu.
 
+// Główny komponent aplikacji.
 const App = () => {
+  // Hooki useState do zarządzania stanem aplikacji.
+  // Przechowują różne informacje o symulacji i UI.
   const [cityCoordinates, setCityCoordinates] = useState(null);
   const [selectedWarhead, setSelectedWarhead] = useState('20t');
   const [explosionType, setExplosionType] = useState('SurfaceExplosion');
@@ -23,15 +22,17 @@ const App = () => {
   const [basicSettings, setBasicSettings] = useState({});
   const [advancedSettings, setAdvancedSettings] = useState({});
   const [simulationEffects, setSimulationEffects] = useState({
-    overpressure3000psi: false,
-    overpressure200psi: false,
-    overpressure20psi: false,
-    overpressure5psi: false,
-    overpressure1psi: false,
-    ionizing20Sv: false,
-    ionizing6Sv: false,
-    ionizing1Sv: false,
+    // Objekt do przechowywania efektów symulacji.
+    ionizing0025Sv: false,
     ionizing01Sv: false,
+    ionizing1Sv: true,
+    ionizing6Sv: true,
+    ionizing20Sv: true,
+    overpressure1psi: true,
+    overpressure5psi: true,
+    overpressure20psi: true,
+    overpressure200psi: false,
+    overpressure3000psi: false,
     Pierwszego: false,
     Drugiego: false,
     Trzeciego: false,
@@ -51,10 +52,10 @@ const handleWarheadChange = (newWarhead) => {
 
   const updateCircleInfo = useCallback((newInfo) => {
     setCircleInfo(newInfo);
-    // setCircleInfo(prevInfo => [...prevInfo, newInfo]);
   }, []);
 
   const handleDetonate = (coordinates) => {
+    // Funkcja wywoływana przy detonacji, aktualizująca stan aplikacji.
     setCityCoordinates([coordinates.lat, coordinates.lon]);
     setShouldDrawCircle(true);
     setIsDetonated(true);
@@ -62,6 +63,7 @@ const handleWarheadChange = (newWarhead) => {
   };
 
   const handleCityChange = (newCity) => {
+    // Funkcja wywoływana przy zmianie miasta w UI, resetuje część stanu.
     setBasicSettings(prevSettings => ({ ...prevSettings, city: newCity }));
     setShouldDrawCircle(false);
     setCityCoordinates(null);
@@ -73,13 +75,15 @@ const handleWarheadChange = (newWarhead) => {
   };
 
   const clearDetonation = () => {
+     // Resetuje stan aplikacji do stanu początkowego.
     setShouldDrawCircle(false);
     setIsDetonated(false);
     setCityCoordinates(null);
     setMapKey(Date.now());
-    setCircleInfo([]); // Resetowanie informacji o efektach przy czyszczeniu detonacji
+    setCircleInfo([]);
   };
   const generateReport = () => {
+    // Funkcja generująca raport w formacie PDF.
     const reportData = { 
       basicSettings, 
       advancedSettings, 
@@ -111,12 +115,13 @@ const handleWarheadChange = (newWarhead) => {
         root.unmount();
         document.body.removeChild(reportElement);
       });
-    }, 1000); // Opóźnienie o 1000ms (1 sekunda)
+    }, 1000); // Opóźnienie jest potrzebne, aby zapewnić czas na wyrenderowanie komponentów.
   };
-
+ // Renderowanie głównych komponentów UI.
   return (
     <div>
       <Nav 
+       // Przekazywanie funkcji jako props do komponentów.
         onDetonate={handleDetonate}
         setSelectedWarhead={setSelectedWarhead}
         setExplosionType={setExplosionType}
@@ -131,6 +136,7 @@ const handleWarheadChange = (newWarhead) => {
         handleWarheadChange={handleWarheadChange}
       />
       <FullScreenMap 
+      // Przekazywanie stanu i funkcji do komponentu mapy.
         key={mapKey}
         cityCoordinates={cityCoordinates}
         selectedWarhead={selectedWarhead}
