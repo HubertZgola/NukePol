@@ -9,17 +9,17 @@
     display: flex;
     justify-content: center;
     .settings-container{
-        // border: 1px solid red;  
-        margin-top: 6rem;
+        margin-top: 2rem;
         display: flex;
         justify-content: center;
         width: 90vw;
-        height: 100vh;
+        height: 90vh;
         input {
             padding: 10px;
             width: 100%;
             border-radius: 10px;
             background: none;
+            font-size: 1rem;
           }
         
           select{
@@ -27,36 +27,42 @@
             width: 100%;
             border-radius: 10px;
             background: none;
+            font-size: 1rem;
         }
           h2{
-            font-size: 1.7rem;
+            font-size: 1.9rem;
             text-decoration: underline;           
         }
           h3{
             margin: 1rem 0;
-            font-size: 1.2rem;         
+            font-size: 1.5rem;         
         }
+        h4{
+          margin: 1rem 0;
+          font-size: 1.2rem;         
+      }
         
         .settings-container-element{
-          width: 40%;
-          height: 70%;
+          width: 60%;
+          height: auto;
           border-radius: 50px;
-          margin: 1rem;
-          padding: 2rem;
+          margin: 0rem;
+          padding: 3rem 6rem;
           background: #3333333d;
-          box-shadow:0 1rem 20rem #333;
+          box-shadow: 1rem 0rem 1rem #333;
           label{
             display: flex;
-            align-items: center;
-            white-space: nowrap;
             margin: 10px;
             width: 100%;
-            input{
-              display: flex;
-              justify-self: flex-end;
+            p{
+              width: 100%;
             }
+            input{
+              width: 100%;
+              height: 1rem;
+             
+             }
           }
-          
           button{
             cursor: pointer;
           }
@@ -88,16 +94,16 @@
   
   @media only screen and (max-width: 1190px) {
       .settings{
+        padding-top: 3rem;
         height: 90vh;
         overflow: scroll;
         .settings-container {
-          margin: 3rem;
           flex-direction: column;
           justify-content: space-between;
           
           .settings-container-element{
             width: 100%;
-            height: 100%;
+            height: auto;
             .danger {
               font-size: 1rem;
               width: 90%;
