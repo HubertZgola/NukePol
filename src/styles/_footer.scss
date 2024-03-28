@@ -14,12 +14,8 @@
     }
 }
 
-@media only screen and (max-width: 720px) {
+@media only screen and (max-width: 1200px) {
     .single-footer {
-      height: 4rem;
-      padding: 0rem 6rem;
-      flex-wrap: nowrap;
-      
-      
+      display: none;
     }
   }

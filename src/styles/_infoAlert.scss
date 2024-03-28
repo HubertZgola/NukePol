@@ -11,8 +11,9 @@
     background-color: #ffffff9d;
     box-shadow:0 12px 50px #333;
     color: rgb(0, 0, 0);
-    z-index: 900;
+    z-index: 998;
     padding: 1rem;
+    cursor: pointer;
     h3{
         align-items: center;
         padding: 1rem 0;
@@ -31,10 +32,10 @@
 
 @media only screen and (max-width: 1190px) {
     .alert-circle-info{
-        width: 30vw;
-        height: 45vh;
-        left: 65vw;
-        top: 15vh;
+        width: 40vw;
+        height: 50vh;
+        left: 58vw;
+        top: 10vh;
         h3{
             font-size: 1.1rem;
     }

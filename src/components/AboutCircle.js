@@ -3,7 +3,7 @@ import effectFontColors from '../ulilities/effectFontColors'; // Import kolorów
 import processEffect from '../ulilities/processEffect'; // Funkcja do przetwarzania nazw efektów
 
 // Komponent AboutCircle wyświetla informacje o efektach symulacji
-const AboutCircle = ({data, currentEffectColors, onEffectClick }) => {
+const AboutCircle = ({data, currentEffectColors, onEffectClick, handleTouchMove }) => {
   
   // Lokalny stan do przechowywania wybranego efektu
   const [selectedEffect, setSelectedEffect] = useState(null);
@@ -18,7 +18,7 @@ const AboutCircle = ({data, currentEffectColors, onEffectClick }) => {
   const sortedData = [...data].sort((a, b) => b.distance - a.distance);
 
   return (
-    <div className="about-circle-info">
+    <div className="about-circle-info" onTouchMove={handleTouchMove}>
       <h2>Informacje o efektach:</h2>
       {sortedData.map((item, index) => (
         <div 

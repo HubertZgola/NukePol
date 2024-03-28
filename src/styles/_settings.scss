@@ -12,7 +12,7 @@
         margin-top: 2rem;
         display: flex;
         justify-content: center;
-        width: 90vw;
+        width: 100vw;
         height: 90vh;
         input {
             padding: 10px;
@@ -102,11 +102,13 @@
           justify-content: space-between;
           
           .settings-container-element{
+            border-radius: 0;
             width: 100%;
             height: auto;
+            padding: 1rem;
             .danger {
               font-size: 1rem;
-              width: 90%;
+              width: 100%;
               margin-bottom: 1rem;
               padding: 0.5rem;
             }

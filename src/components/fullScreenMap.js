@@ -53,6 +53,10 @@ const FullScreenMap = ({
   const [infoAlertData, setInfoAlertData] = useState(null);
   // Dane dla alertu informacyjnego
   
+  const handleTouchMove = (e) => {
+    e.stopPropagation();
+  };
+
    // Funkcja wywoływana po kliknięciu na efekt
   const onEffectClick = useCallback((selectedEffect) => {
     setSelectedEffect(selectedEffect);
@@ -87,7 +91,7 @@ const FullScreenMap = ({
       />
       {/* Wyświetlanie alertu z informacjami */}
       {showInfoAlert && infoAlertData && (
-        <InfoAlert data={infoAlertData}/>
+        <InfoAlert data={infoAlertData} handleTouchMove={handleTouchMove}/>
       )}
       {/* Zmiana widoku mapy */}
       {cityCoordinates && <ChangeView center={cityCoordinates} zoom={mapZoom} />}
@@ -110,6 +114,7 @@ const FullScreenMap = ({
           currentEffectColors={effectColors}
           onEffectClick={onEffectClick}
           selectedEffect={selectedEffect}
+          handleTouchMove={handleTouchMove}
         />
       )}
     </MapContainer>
