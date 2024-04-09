@@ -1,6 +1,11 @@
-![image](https://github.com/HubertZgola/NukePol/assets/99662754/5b49157b-a89a-4f43-8bfb-9c542634688f)
-![image](https://github.com/HubertZgola/NukePol/assets/99662754/7b461d34-ff05-452b-8845-1711c87c72e5)
-![image](https://github.com/HubertZgola/NukePol/assets/99662754/e911bedb-2641-4eeb-89e6-a1eeddbb2f3e)
+Link to the website: https://nukepol.azurewebsites.net/
+
+![NukePol1](https://github.com/HubertZgola/NukePol/assets/99662754/2fc9ab19-0aca-4ac0-a1a5-adf9ba6beb4d)
+![NukePol2](https://github.com/HubertZgola/NukePol/assets/99662754/ff2396cc-b5ec-4d4d-82f3-558cd0b54a2c)
+![NukePol3](https://github.com/HubertZgola/NukePol/assets/99662754/63aff087-d77b-4f52-a4df-a4247960a5c1)
+![NukePol4](https://github.com/HubertZgola/NukePol/assets/99662754/1171433a-a13c-42b8-8515-4c371d00054a)
+![NukePol5](https://github.com/HubertZgola/NukePol/assets/99662754/964176ad-dfe5-4c9c-bdb7-d5d378218351)
+
 
 # Getting Started with Create React App
 
