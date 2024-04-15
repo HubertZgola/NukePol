@@ -6,74 +6,37 @@ Link to the website: https://nukepol.azurewebsites.net/
 ![NukePol4](https://github.com/HubertZgola/NukePol/assets/99662754/1171433a-a13c-42b8-8515-4c371d00054a)
 ![NukePol5](https://github.com/HubertZgola/NukePol/assets/99662754/964176ad-dfe5-4c9c-bdb7-d5d378218351)
 
+# NukePol
+A nuclear explosion detection and simulation application providing interactive visualization of detonation effects and report generation. It features a navigation bar allowing access to detonation settings and report downloads. Users can configure basic and advanced simulation parameters, then observe results on an interactive map. The reporting function delivers detailed analyses and charts for better understanding of potential hazards. Additionally, the application offers information on prevention and risks related to detonation effects, based on current scientific and legal data.
 
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## How to run the application on your local machine
 
-## Available Scripts
+To run the application, follow these steps:
 
-In the project directory, you can run:
+### 1. Install Docker and Ansible
 
-### `npm start`
+Make sure you have Docker and Ansible installed on your system. If not, follow the instructions on the following pages:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- [Install Docker](https://docs.docker.com/get-docker/)
+- [Install Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### 2. Run the Ansible Playbook
 
-### `npm test`
+Go to the nukepol application directory.
+Run the Ansible playbook located in the repository by executing CLI command:
+ansible-playbook playbook.yml
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+This playbook will create a directory, clone the repository, build a Docker image, and run a Docker container with the NukePol application, which will be accessible on port 9123 on your localhost.
 
-### `npm run build`
+### 3. Open the Application in your Browser
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+After the playbook execution is finished, open your web browser and navigate to:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+http://localhost:9123/
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Works! Have fun!
 
-### `npm run eject`
+### 4. Additional information:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+If the interface seems too large, the percentage of the website size should be reduced.
