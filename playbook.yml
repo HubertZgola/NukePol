@@ -1,0 +1,20 @@
+---
+- name: Deploy NukePol application
+  hosts: localhost
+  become: yes
+  tasks:
+    - name: Create Directory
+      file:
+        path: /NukePolHubertZgola
+        state: directory
+
+    - name: Clone NukePol repository
+      git:
+        repo: https://github.com/HubertZgola/NukePol.git
+        dest: /NukePolHubertZgola
+
+    - name: Build Docker image
+      command: docker build -t nukepol-hubert-zgola /NukePolHubertZgola
+
+    - name: Run Docker container
+      command: docker run -d --name nukepol-container -p 9123:80 nukepol-hubert-zgola
