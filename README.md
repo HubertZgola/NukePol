@@ -1,14 +1,13 @@
 Link to the website: https://nukepol.azurewebsites.net/
 
+# NukePol
+A nuclear explosion detection and simulation application providing interactive visualization of detonation effects and report generation. It features a navigation bar allowing access to detonation settings and report downloads. Users can configure basic and advanced simulation parameters, then observe results on an interactive map. The reporting function delivers detailed analyses and charts for better understanding of potential hazards. Additionally, the application offers information on prevention and risks related to detonation effects, based on current scientific and legal data.
+
 ![NukePol1](https://github.com/HubertZgola/NukePol/assets/99662754/2fc9ab19-0aca-4ac0-a1a5-adf9ba6beb4d)
 ![NukePol2](https://github.com/HubertZgola/NukePol/assets/99662754/ff2396cc-b5ec-4d4d-82f3-558cd0b54a2c)
 ![NukePol3](https://github.com/HubertZgola/NukePol/assets/99662754/63aff087-d77b-4f52-a4df-a4247960a5c1)
 ![NukePol4](https://github.com/HubertZgola/NukePol/assets/99662754/1171433a-a13c-42b8-8515-4c371d00054a)
 ![NukePol5](https://github.com/HubertZgola/NukePol/assets/99662754/964176ad-dfe5-4c9c-bdb7-d5d378218351)
-
-# NukePol
-A nuclear explosion detection and simulation application providing interactive visualization of detonation effects and report generation. It features a navigation bar allowing access to detonation settings and report downloads. Users can configure basic and advanced simulation parameters, then observe results on an interactive map. The reporting function delivers detailed analyses and charts for better understanding of potential hazards. Additionally, the application offers information on prevention and risks related to detonation effects, based on current scientific and legal data.
-
 
 ## How to run the application on your local machine
 
